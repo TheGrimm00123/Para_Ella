@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo de Flores Realista</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Fondo del cielo y césped */
+        body {
+            background: linear-gradient(to top, #228B22 30%, #87CEEB 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        /* Sol con sombras mejoradas */
+        #sun {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 12vw;
+            height: 12vw;
+            background: radial-gradient(circle, yellow 40%, orange 70%, rgba(255,223,0,0) 90%);
+            border-radius: 50%;
+            box-shadow: 0 0 100px rgba(255, 223, 0, 0.8), 0 0 200px rgba(255, 223, 0, 0.6);
+        }
+
+        /* Nubes */
+        .cloud {
+            position: absolute;
+            background: radial-gradient(circle, #ffffff 70%, #f0f0f0 100%);
+            border-radius: 50%;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+            opacity: 0.85;
+            animation: cloudMove 100s linear infinite;
+        }
+
+        .cloud1 {
+            width: 20vw;
+            height: 10vw;
+            top: 12%;
+            left: 15%;
+        }
+
+        .cloud2 {
+            width: 25vw;
+            height: 12vw;
+            top: 20%;
+            left: 60%;
+        }
+
+        @keyframes cloudMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(200vw); }
+        }
+
+        /* Montañas ajustadas */
+        .mountain {
+            position: absolute;
+            bottom: 20%;
+            width: 0;
+            height: 0;
+            border-left: 15vw solid transparent;
+            border-right: 15vw solid transparent;
+            border-bottom: 25vw solid;
+            box-shadow: -10px 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .mountain1 {
+            left: 5%;
+            border-bottom-color: rgba(85, 107, 47, 0.9);
+        }
+
+        .mountain2 {
+            left: 35%;
+            border-bottom-color: rgba(107, 142, 35, 0.7);
+        }
+
+        .mountain3 {
+            left: 65%;
+            border-bottom-color: rgba(85, 107, 47, 0.5);
+        }
+
+        /* Árboles */
+        .tree {
+            position: absolute;
+            bottom: 20%;
+            width: 0;
+            height: 0;
+            border-left: 4vw solid transparent;
+            border-right: 4vw solid transparent;
+            border-bottom: 8vw solid #228B22;
+        }
+
+        .tree:after {
+            content: '';
+            position: absolute;
+            bottom: -4vw;
+            left: -1.5vw;
+            width: 3vw;
+            height: 3vw;
+            background: #8B4513;
+        }
+
+        .tree1 {
+            left: 20%;
+        }
+
+        .tree2 {
+            left: 70%;
+        }
+
+        /* Pájaros volando */
+        .bird {
+            position: absolute;
+            width: 30%; /* Tamaño predeterminado del pájaro */
+            top: 30%;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Aplicamos sombra */
+        }
+
+        /* Animación para bird1 */
+        .bird1 {
+            left: 10%;
+            animation: flyBird1 20s linear infinite;
+            animation-delay: 5s; /* Espera 5 segundos antes de comenzar */
+        }
+
+        /* Animación para bird2 */
+        .bird2 {
+            left: 100%;
+            animation: flyBird2 18s linear infinite;
+            animation-delay: 5s; /* Espera 5 segundos antes de comenzar */
+        }
+
+        /* Animación para bird1 (vuela hacia la derecha y desaparece) */
+        @keyframes flyBird1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100vw, -10vh); } /* Fuera del plano a la derecha */
+        }
+
+        /* Animación para bird2 (vuela hacia la izquierda y desaparece) */
+        @keyframes flyBird2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100vw, -10vh); } /* Fuera del plano a la izquierda */
+        }
+
+        /* Casita mejorada con sombra */
+        .house {
+            position: absolute;
+            bottom: 20%;
+            width: 12vw; /* Aumentamos el tamaño de la casa */
+            height: 10vw;
+            background: #8B4513;
+            border: 0.5vw solid #A0522D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .house:before {
+            content: '';
+            position: absolute;
+            top: -5vw;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6vw solid transparent;
+            border-right: 6vw solid transparent;
+            border-bottom: 6vw solid #8B0000;
+        }
+
+        /* Puerta de la casa */
+        .house-door {
+            width: 3vw;
+            height: 5vw;
+            background: #654321;
+            position: absolute;
+            bottom: 0;
+        }
+
+        /* Césped con textura */
+        #grass {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            background: url('img/grass_texture.png'), linear-gradient(to top, #006400, #32CD32);
+            background-size: cover;
+            clip-path: polygon(0% 100%, 100% 100%, 100% 75%, 0% 85%);
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Campo de flores */
+        #flowers-field {
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            z-index: 10;
+        }
+
+        .flower {
+            height: 16vh; /* Aumentamos el tamaño de las flores */
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6)); /* Agregamos sombra */
+            animation: swayFlower 3s infinite ease-in-out, grow 4s infinite ease-in-out alternate;
+        }
+
+        @keyframes swayFlower {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        @keyframes grow {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.9); }
+        }
+
+        /* Mariposas animadas */
+        .butterfly {
+            position: absolute;
+            width: 7vw; /* Aumentamos el tamaño de las mariposas */
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6)); /* Agregamos sombra */
+            animation: flyButterfly 15s linear infinite;
+        }
+
+        .butterfly1 {
+            top: 55%;
+            left: 5%;
+            animation: fly1 15s linear infinite;
+        }
+
+        .butterfly2 {
+            top: 50%;
+            right: 5%;
+            animation: fly2 20s linear infinite reverse;
+        }
+
+        @keyframes fly1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(80vw, -20vh); }
+            100% { transform: translate(200vw, 0); }
+        }
+
+        @keyframes fly2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-80vw, 20vh); }
+            100% { transform: translate(-200vw, 0); }
+        }
+
+        @keyframes flyButterfly {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50vw, -30vh) rotate(360deg); }
+        }
+
+        /* Río */
+        #river {
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 15%;
+            background: linear-gradient(to right, #4169E1, #1E90FF);
+            clip-path: polygon(0% 100%, 100% 100%, 80% 80%, 20% 80%);
+            opacity: 0.8;
+        }
+
+        /* Camino */
+        #path {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            width: 18%; /* Aumentamos el tamaño del camino */
+            height: 18%;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            z-index: 9;
+        }
+
+        /* Responsividad para imágenes */
+        @media (min-width: 1200px) {
+            .bird {
+                width: 20%; /* Hacemos la imagen más pequeña en pantallas grandes */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bird {
+                width: 40%; /* Hacemos la imagen más grande en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón con logo de Spotify en la parte superior -->
+    <div id="spotify-button" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" style="width: 40px; height: 40px;">
+        <a href="https://open.spotify.com/playlist/2mj9uK3jqZKi4LnwapifIw?si=x8i9nDF3S_6JRYlDe_Mytg&utm_source=copy-link" target="_blank" style="margin-left: 10px;">
+            <button type="button" class="btn btn-success">Escuchar</button>
+        </a>
+    </div>
+
+    <!-- Menú lateral derecho -->
+    <div id="menu" style="position: fixed; top: 10%; right: 0; display: flex; flex-direction: column; gap: 10px; padding: 10px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px 0 0 10px; box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">Leer</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">Leer</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">Leer</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal4">Leer</button>
+    </div>
+
+    <!-- Modales -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal1Label">PRIMEROS PARRAFOS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Saludos,
+Me encuentro perdido en el cómo iniciar o finalizar estas líneas, que más que simples palabras, buscan ser un susurro a tu oído, un murmullo al corazón.
+Permíteme empezar con una disculpa por el tono que he usado contigo; sé que no lo mereces, pero quizás en ese frío distanciamiento encuentre yo la fuerza para alejarme. A veces, el destino juega sus cartas de manera tan enigmática que no queda más remedio que correr, y en esta ocasión, huir se convierte en un acto tanto de autocuidado como de respeto hacia ti. Lamento profundamente cualquier sombra que mi mal genio haya proyectado sobre ti.
+Estas palabras, que tal vez sean las últimas que dirija hacia ti, llevan consigo la confesión de que me encantas. Sé que ya lo he mencionado antes y no recibí eco en tu voz, y está bien, todos somos libres de sentir y decidir sobre nuestras emociones y gustos personales. Aun así, sentí necesario, tal vez por última vez, dejarte saber cuánto significas para mí.
+Quizá nuestros caminos se crucen de nuevo, en un encuentro fortuito dictado por el azar y la vida. Sin embargo, me mantendré a distancia, como quizás siempre debió ser. Comprendo tu perspectiva y la respeto profundamente, por lo que elijo retirarme.
+Fueron preciosos esos días compartidos, días en los que, intentando parecer indiferente, moría por dentro de amor por ti. Me alejo, llevado tanto por la cobardía como por mi incapacidad de manejar estas emociones arremolinadas, deseándote lo mejor en todo.
+Con un corazón que desborda ganas de expresar todo lo que siento y que anhela liberar esas emociones contenidas, me despido, reprimiendo aquellos sentimientos tan vivos. Así, silenciando mi corazón, te digo adiós, confesándote que te quiero <3 y que, aunque quisiera ser algo más que un simple conocido, así lo ha querido la vida, y contra eso, nadie puede competir. Cuídate, sonríe, sé feliz y sigue adelante con tus estudios, porque realmente eres increíble.                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal2Label">LO INCREIBLE DE TI...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+              <b>  Renuncio a lo que nunca fue</b> <br>
+Cada domingo que te veo, mis sentimientos se desbordan, anhelo un abrazo que no debo dar. Renuncio a la cercanía, a la esperanza de que seas mi universo. Aunque me duele, sé que un día serás solo un recuerdo. No fuimos lo que hubiera querido, pero me alejo con la tranquilidad de haber hecho lo correcto.
+
+<b>La Belleza que Eres</b>
+    <br>
+Tu belleza es como un amanecer que ilumina el mundo. Tus ojos brillan con sabiduría, y tu sonrisa transforma hasta los días más grises. Pero lo más hermoso es lo que no se ve: en tus imperfecciones está lo que te hace única y especial. Eres perfecta a tu manera, porque aceptas quién eres, y eso te distingue de los demás. Tu presencia se siente como una brisa cálida que reconforta, y tu autenticidad te hace inolvidable.
+
+<b>Despedida sin retorno</b>
+    <br>
+Hubiera querido que lo que siento fuera recíproco, pero no siempre las cosas suceden como deseamos. Me despido, aunque no quiero. Desearía quedarme a tu lado, pero sé que debo alejarme. Esto es lo último que dejo: el rastro de alguien que te amó sin medida, pero nunca fue correspondido.
+
+<b>Eres la estrella más brillante</b>
+    <br>
+Desde que te conocí, no has salido de mi mente. Te has vuelto una constante, alguien importante para mí, aunque no lo demuestre. Eres la estrella más brillante entre millones, y te elegiría una y un millón de veces. Aunque no seas mi enamorada, tu imperfección te hace perfecta y única. Siempre te elegiría, porque eres alguien que, sin querer, deja una huella profunda.
+<br>
+<b>La Belleza que Eres </b>
+<br>
+Tu belleza es como un amanecer que ilumina el mundo. Tus ojos brillan con sabiduría, y tu sonrisa transforma hasta los días más grises. Pero lo más hermoso es lo que no se ve: en tus imperfecciones está lo que te hace única y especial. Eres perfecta a tu manera, porque aceptas quién eres, y eso te distingue de los demás. Tu presencia se siente como una brisa cálida que reconforta, y tu autenticidad te hace inolvidable.
+<br>
+<b>Despedida sin retorno</b>
+    <br>
+Hubiera querido que lo que siento fuera recíproco, pero no siempre las cosas suceden como deseamos. Me despido, aunque no quiero. Desearía quedarme a tu lado, pero sé que debo alejarme. Esto es lo último que dejo: el rastro de alguien que te amó sin medida, pero nunca fue correspondido.
+
+<br>
+<b>Eres la estrella más brillante</b>
+    <br>
+Desde que te conocí, no has salido de mi mente. Te has vuelto una constante, alguien importante para mí, aunque no lo demuestre. Eres la estrella más brillante entre millones, y te elegiría una y un millón de veces. Aunque no seas mi enamorada, tu imperfección te hace perfecta y única. Siempre te elegiría, porque eres alguien que, sin querer, deja una huella profunda.
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal3Label">Miércoles 25 de septiembre del 2024</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Hoy me acordé de ti y mis manos se llenaron de palabras,
+admiro el esfuerzo que pones en todo lo que haces,
+tu inteligencia brilla como un faro en la distancia,
+eres capaz, fuerte, siempre en movimiento,
+con una energía que te impulsa a conquistar cada reto.
+
+No busco una oportunidad, ni que estés conmigo,
+solo quiero que veas lo que quizás no alcanzas a ver,
+que te des cuenta de lo especial que eres,
+aunque no te conozca en profundidad,
+lo poco que sé de ti ya me basta para admirarte.
+
+Te deseo lo mejor, de corazón,
+que sigas adelante,
+porque eres maravillosa,
+porque eres genial,
+y quiero que estés bien,
+que nunca olvides lo increíble que eres.
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal4Label">Sábado 29 de septiembre Horas 01:19 A.M <br>
+La disculpa
+</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                ¡Hola! En esta noche larga y calurosa me pondré a pensar toda la noche en como pedir disculpas….
+Lamento mucho la forma en la que he estado tratando. 
+Me alejo de ti para no volverte a tratar asi, me alejo de ti para no volverte a ver, talvez te vea en el instituto, pero no estaré tan cerca como haya en el trabajo, hice esto porque te quiero, y por eso no espero ninguna respuesta tuya, solamente despedirme de ti no sin antes decirte lo maravillosa que eres y tus virtudes notorias, eres genial y te quiero, sigue sonriendo, sigue siendo alegre, eres hermosa, única y cuídate, se feliz.
+
+<center><b><br>ADIOS DESDE MI CORAZON.
+<br>CON MUCHO CARIÑO JHONNY A.
+<br>TE QUIERO</b></center>
+<span style="font-size:8px">P.D.: Hice una playlist en Spotify con algunas canciones que me gustaría dedicarte. Con el tiempo iré añadiendo más. Si gustas, puedes guardarla.</span>
+             </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sol -->
+    <div id="sun"></div>
+
+    <!-- Nubes -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+
+    <!-- Montañas -->
+    <div class="mountain mountain1"></div>
+    <div class="mountain mountain2"></div>
+    <div class="mountain mountain3"></div>
+
+    <!-- Casita mejorada -->
+    <div class="house">
+        <div class="house-door"></div>
+    </div>
+
+    <!-- Campo de flores -->
+    <div id="flowers-field">
+        <img src="img/flor1.gif" class="flower" alt="Flor 1">
+        <img src="img/flor2.gif" class="flower" alt="Flor 2">
+        <img src="img/mariposa3.gif" class="flower" alt="Flor 3">
+    </div>
+
+    <!-- Mariposas animadas -->
+    <img src="img/mariposa.gif" class="butterfly butterfly1" alt="Mariposa 1">
+    <img src="img/mariposa2.gif" class="butterfly butterfly2" alt="Mariposa 2">
+
+    <!-- Pájaros volando -->
+    <img src="img/pajaro1.gif" class="bird bird1" alt="Pájaro 1">
+    <img src="img/pajaro2.gif" class="bird bird2" alt="Pájaro 2">
+
+    <!-- Río -->
+    <div id="river"></div>
+
+    <!-- Césped realista -->
+    <div id="grass"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
