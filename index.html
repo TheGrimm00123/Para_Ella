@@ -147,7 +147,7 @@
   <!-- Cuadro 6 -->
   <div class="scroll-item" id="item6">
     <div class="text-box">
-      Me encantaría salir contigo y es por ello que me animo a hacerte la siguiente pregunta —> 
+     Me gustaria conocerte mas, saber mas cosas sobre ti fuera de lo laboral, claro si tu me lo permites. <br> Es por ello que tengo el atrevimiento de preguntar si —> 
     </div>
     <div class="nav-buttons">
       <button class="btn btn-light" onclick="scrollToItem(5)">Atrás</button>
@@ -158,7 +158,7 @@
   <!-- Cuadro 7 -->
   <div class="scroll-item" id="item7">
     <div class="text-box">
-      TE GUSTARIA SALIR CON MIGO? <br> <p style="color: black; font-size: 30px;">una cita</p>
+      TE GUSTARIA SALIR CON MIGO? <p style="color: red;">KIOMI</p><br> <p style="color: black; font-size: 15px;">una cita</p>
       <div class="mt-3">
         <button class="btn btn-success me-2" onclick="responder('si')">Sí</button>
         <button class="btn btn-danger" onclick="responder('no')">No</button>
@@ -182,9 +182,9 @@
       if (opcion === 'no') {
         const overlay = document.createElement('div');
         overlay.className = 'fade-overlay';
-        overlay.innerText = 'Gracias por leerme, que la pases bonito hoy dia';
+        overlay.innerText = 'Gracias por leerme, que tengas un maravilloso dia. 😊';
         document.body.appendChild(overlay);
-        setTimeout(() => overlay.remove(), 3000);
+        setTimeout(() => overlay.remove(), 7000);
       } else if (opcion === 'si') {
         window.location.href = 'https://wa.me/59175654849';
       }
